@@ -152,3 +152,5 @@ python3 sudoku_reader.py sample3.png | ruby sudoku-ruby.rb
 ## 謝辞
 
 `sudoku_reader.py` のオリジナルコードは [kkJobSrc](https://github.com/kkJobSrc/sudoku_reader) 氏が公開されたものをベースにしています。画像認識・OCR による数独読み取りの実装を提供してくださったことに、心より感謝申し上げます。
+
+数独素人の私に賢い解き方を授けてくれた妻にも感謝です。
