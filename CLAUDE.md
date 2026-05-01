@@ -2,6 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Development Workflow
+
+- **すべての変更はブランチを作成してから行う。** `main` への直接コミットは禁止。
+- ブランチ上で変更を実施したら、ユーザーがテストを行う。
+- テスト完了後、Claude がコミットして `main` へマージする。
+
 ## Runtime
 
 This project runs in a Jupyter notebook with the iRuby kernel (`RubySudoku.ipynb`). There are no standalone Ruby files, build steps, or test suite — execute cells sequentially in Jupyter.
