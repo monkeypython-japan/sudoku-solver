@@ -198,7 +198,7 @@ class SUDOKU():
     
         txt = self.ocr_tool.image_to_string(img, lang="eng", builder=self.ocr_build)
         for fallback in self.ocr_build_fallbacks:
-            if txt:
+            if re.search(r'[0-9]', txt):
                 break
             txt = self.ocr_tool.image_to_string(img, lang="eng", builder=fallback)
 
