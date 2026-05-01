@@ -570,18 +570,28 @@ class TableLoader
   end
 end
 
-# Asashi shinbun Level 6 stars
-stable = [
-  "200050001",
-  "007100030",
-  "040000800",
-  "000300070",
-  "100000009",
-  "050008000",
-  "003000040",
-  "080004200",
-  "600090005"
-]
+# パイプ経由（stdin）でパズルを受け取るか、組み込みパズルを使う
+if $stdin.isatty
+  # 端末から直接起動: 組み込みパズル（朝日新聞 6つ星）を使用
+  stable = [
+    "200050001",
+    "007100030",
+    "040000800",
+    "000300070",
+    "100000009",
+    "050008000",
+    "003000040",
+    "080004200",
+    "600090005"
+  ]
+else
+  # パイプ入力: sudoku_reader.py の出力（9文字×9行）を読み込む
+  stable = $stdin.read.split("\n").map(&:strip).reject(&:empty?).first(9)
+  if stable.length != 9 || stable.any? { |s| s.length != 9 }
+    $stderr.puts "エラー: 9文字×9行の入力が必要です"
+    exit 1
+  end
+end
 
 input_table = TableLoader.new.read(stable)
 table = Table.new

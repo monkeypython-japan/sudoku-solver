@@ -229,12 +229,16 @@ class SUDOKU():
 
 if __name__ == "__main__":
 
-    # Arguments 
-    paser = argparse.ArgumentParser()
-    paser.add_argument("fig_path", type=str, help="A sudoku image path.")
-    paser.add_argument("-d", "--debug", action="store_true")
-    paser.add_argument("-j", "--json", action="store_true")    
-    
+    # Arguments
+    paser = argparse.ArgumentParser(
+        description="数独画像から数字を読み取り、9文字×9行の文字列として出力する。"
+                    "出力はそのまま sudoku-ruby.rb にパイプで渡せる。"
+    )
+    paser.add_argument("fig_path", type=str, help="数独画像のパス")
+    paser.add_argument("-d", "--debug", action="store_true", help="デバッグ画像を result/ に保存する")
+    paser.add_argument("-j", "--json",  action="store_true", help="param.json からパラメータを読み込む")
+    paser.add_argument("-v", "--verbose", action="store_true", help="グリッド形式で結果を表示する")
+
     args = paser.parse_args()
 
     try:
@@ -249,8 +253,25 @@ if __name__ == "__main__":
         if test.debug_flg:
             test.draw_reacts()
 
-        print(test.sudoku_prob)
-    
+        # パイプライン用出力: 9文字×9行
+        for row in range(9):
+            print(''.join(str(int(test.sudoku_prob[row, col])) for col in range(9)))
+
+        # -v 指定時は人間が読みやすいグリッドも表示
+        if args.verbose:
+            import sys
+            print("", file=sys.stderr)
+            print("認識結果:", file=sys.stderr)
+            header = "  0 1 2 3 4 5 6 7 8"
+            print(header, file=sys.stderr)
+            for row in range(9):
+                line = f"{row} "
+                for col in range(9):
+                    v = int(test.sudoku_prob[row, col])
+                    line += str(v) if v != 0 else "."
+                    line += " "
+                print(line, file=sys.stderr)
+
     except:
         import traceback
         print(traceback.format_exc())
