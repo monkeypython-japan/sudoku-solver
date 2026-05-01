@@ -130,9 +130,22 @@ python3 sudoku_reader.py sudoku_test.png | ruby sudoku-ruby.rb
 
 ---
 
-## テスト用画像
+## サンプル画像
 
-`sudoku_test.png` はテスト用のサンプル画像です（Wikimedia Commons より）。
+| ファイル | 出所 | 説明 |
+|---------|------|------|
+| `sudoku_test.png` | 自動生成 | 朝日新聞6つ星パズル（組み込みパズルと同一問題） |
+| `sample1.png` | Wikimedia Commons | 解法解説用サンプル（26ヒント） |
+| `sample2.png` | Wikimedia Commons | 解法解説用サンプル（28ヒント） |
+| `sample3.png` | Wikimedia Commons | 解法解説用サンプル（33ヒント） |
+
+`sample1.png`〜`sample3.png` は [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Sudoku) より取得した画像です。いずれもパイプラインで正しく解けることを確認済みです。
+
+```bash
+python3 sudoku_reader.py sample1.png | ruby sudoku-ruby.rb
+python3 sudoku_reader.py sample2.png | ruby sudoku-ruby.rb
+python3 sudoku_reader.py sample3.png | ruby sudoku-ruby.rb
+```
 
 ---
 
